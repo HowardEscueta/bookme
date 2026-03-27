@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Provider {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  businessName String   @map("business_name")
+  slug         String   @unique
+  bio          String   @default("")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  services     Service[]
+  availability Availability[]
+  bookings     Booking[]
+
+  @@map("providers")
+}
+
+model Service {
+  id         String   @id @default(uuid()) @db.Uuid
+  providerId String   @map("provider_id") @db.Uuid
+  name       String
+  duration   Int
+  price      Int
+  sortOrder  Int      @default(0) @map("sort_order")
+  isActive   Boolean  @default(true) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  provider Provider  @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  bookings Booking[]
+
+  @@map("services")
+}
+
+model Availability {
+  id         String @id @default(uuid()) @db.Uuid
+  providerId String @map("provider_id") @db.Uuid
+  dayOfWeek  Int    @map("day_of_week")
+  startTime  String @map("start_time")
+  endTime    String @map("end_time")
+
+  provider Provider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@unique([providerId, dayOfWeek])
+  @@map("availability")
+}
+
+model Booking {
+  id          String   @id @default(uuid()) @db.Uuid
+  providerId  String   @map("provider_id") @db.Uuid
+  serviceId   String   @map("service_id") @db.Uuid
+  date        String
+  time        String
+  clientName  String   @map("client_name")
+  clientPhone String   @map("client_phone")
+  status      String   @default("pending")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  provider Provider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  service  Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@index([providerId, date])
+  @@index([providerId, status])
+  @@map("bookings")
+}
