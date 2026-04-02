@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
+import { sendBookingNotification } from "@/lib/email";
 
 export async function POST(
   req: NextRequest,
@@ -97,8 +98,20 @@ export async function POST(
       time,
       clientName,
       clientPhone,
+      status: "confirmed",
     },
     include: { service: true },
+  });
+
+  // Notify provider — fire and forget, don't block the response
+  sendBookingNotification({
+    providerEmail: provider.email,
+    providerBusiness: provider.businessName,
+    clientName,
+    clientPhone,
+    serviceName: service.name,
+    date,
+    time,
   });
 
   return NextResponse.json(

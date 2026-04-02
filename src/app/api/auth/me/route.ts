@@ -14,6 +14,6 @@ export async function GET() {
     name: provider.name,
     businessName: provider.businessName,
     slug: provider.slug,
-    bio: provider.bio,
+    bio: provider.bio ?? "",
   });
 }
