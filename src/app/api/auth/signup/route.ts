@@ -30,30 +30,35 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Check if email or slug already taken
-  const existing = await prisma.provider.findFirst({
-    where: { OR: [{ email }, { slug }] },
-  });
+  try {
+    // Check if email or slug already taken
+    const existing = await prisma.provider.findFirst({
+      where: { OR: [{ email }, { slug }] },
+    });
 
-  if (existing) {
-    const field = existing.email === email ? "Email" : "Slug";
-    return NextResponse.json(
-      { error: `${field} is already taken` },
-      { status: 409 }
-    );
+    if (existing) {
+      const field = existing.email === email ? "Email" : "Slug";
+      return NextResponse.json(
+        { error: `${field} is already taken` },
+        { status: 409 }
+      );
+    }
+
+    const provider = await prisma.provider.create({
+      data: {
+        email,
+        passwordHash: hashSync(password, 10),
+        name,
+        businessName,
+        slug,
+      },
+    });
+
+    await createSession(provider.id);
+
+    return NextResponse.json({ id: provider.id, slug: provider.slug });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-
-  const provider = await prisma.provider.create({
-    data: {
-      email,
-      passwordHash: hashSync(password, 10),
-      name,
-      businessName,
-      slug,
-    },
-  });
-
-  await createSession(provider.id);
-
-  return NextResponse.json({ id: provider.id, slug: provider.slug });
 }
