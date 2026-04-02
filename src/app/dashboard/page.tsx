@@ -199,7 +199,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-bg-warm">
       {/* Top nav */}
       <nav className="bg-bg shadow-sm shadow-black/[0.03]">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold text-secondary tracking-tight">BookMe</Link>
           <div className="flex items-center gap-5">
             <Link href={`/${provider.slug}`} className="text-sm text-primary font-medium hover:underline">
@@ -212,7 +212,7 @@ export default function Dashboard() {
         </div>
       </nav>
 
-      <div className="max-w-4xl mx-auto px-6 py-8">
+      <div className="max-w-6xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-secondary tracking-tight">{provider.businessName}</h1>
@@ -466,7 +466,7 @@ export default function Dashboard() {
 
         {/* Profile tab */}
         {activeTab === "profile" && (
-          <div className="max-w-lg">
+          <div className="max-w-xl">
             <form onSubmit={saveProfile} className="flex flex-col gap-5">
               <div>
                 <label className="block text-sm font-medium text-secondary mb-2">Business name</label>
