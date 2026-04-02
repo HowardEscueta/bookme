@@ -43,7 +43,7 @@ export default function BookingFlow({ slug }: { slug: string }) {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [timeSlots, setTimeSlots] = useState<string[]>([]);
+  const [timeSlots, setTimeSlots] = useState<{ time: string; booked: boolean }[]>([]);
   const [slotsLoading, setSlotsLoading] = useState(false);
   const [clientName, setClientName] = useState("");
   const [clientPhone, setClientPhone] = useState("");
@@ -69,7 +69,7 @@ export default function BookingFlow({ slug }: { slug: string }) {
       `/api/providers/${slug}/slots?date=${selectedDate}&service=${selectedService.id}`
     )
       .then((res) => res.json())
-      .then((data) => setTimeSlots(data.slots || []))
+      .then((data) => setTimeSlots(data.slots || [])  )
       .finally(() => setSlotsLoading(false));
   }, [slug, selectedService, selectedDate]);
 
@@ -263,7 +263,7 @@ export default function BookingFlow({ slug }: { slug: string }) {
                   className={`flex-shrink-0 w-[4.25rem] py-3 rounded-2xl text-center ${
                     selectedDate === date
                       ? "bg-primary text-white shadow-sm"
-                      : "bg-bg text-secondary hover:bg-bg-soft shadow-sm shadow-black/[0.03]"
+                      : "bg-bg text-secondary hover:bg-bg-soft shadow-sm shadow-black/3"
                   }`}
                 >
                   <p className="text-[10px] uppercase tracking-wide opacity-70">
@@ -295,14 +295,21 @@ export default function BookingFlow({ slug }: { slug: string }) {
                   </p>
                 ) : (
                   <div className="grid grid-cols-3 gap-2">
-                    {timeSlots.map((time) => (
+                    {timeSlots.map(({ time, booked }) => (
                       <button
                         key={time}
+                        disabled={booked}
                         onClick={() => {
-                          setSelectedTime(time);
-                          setStep("details");
+                          if (!booked) {
+                            setSelectedTime(time);
+                            setStep("details");
+                          }
                         }}
-                        className="py-3 rounded-xl text-sm font-medium bg-bg shadow-sm shadow-black/[0.03] hover:bg-primary hover:text-white"
+                        className={
+                          booked
+                            ? "py-3 rounded-xl text-sm font-medium bg-bg-soft text-muted/50 line-through cursor-not-allowed shadow-sm shadow-black/3"
+                            : "py-3 rounded-xl text-sm font-medium bg-bg shadow-sm shadow-black/3 hover:bg-primary hover:text-white"
+                        }
                       >
                         {formatTime(time)}
                       </button>

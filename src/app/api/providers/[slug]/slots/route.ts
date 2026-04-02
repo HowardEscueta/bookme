@@ -60,14 +60,13 @@ export async function GET(
   const startMinutes = startH * 60 + startM;
   const endMinutes = endH * 60 + endM;
 
-  const slots: string[] = [];
+  const slots: { time: string; booked: boolean }[] = [];
 
   for (let m = startMinutes; m + service.duration <= endMinutes; m += 30) {
     const h = Math.floor(m / 60);
     const min = m % 60;
     const timeStr = `${h.toString().padStart(2, "0")}:${min.toString().padStart(2, "0")}`;
 
-    // Check if this slot overlaps with any existing booking
     const isBooked = existingBookings.some((booking) => {
       const [bH, bM] = booking.time.split(":").map(Number);
       const bookingStart = bH * 60 + bM;
@@ -77,9 +76,7 @@ export async function GET(
       return slotStart < bookingEnd && slotEnd > bookingStart;
     });
 
-    if (!isBooked) {
-      slots.push(timeStr);
-    }
+    slots.push({ time: timeStr, booked: isBooked });
   }
 
   return NextResponse.json({ slots });
