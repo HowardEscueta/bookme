@@ -2,6 +2,36 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { getSession } from "@/lib/auth";
 
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+
+  const booking = await prisma.booking.findUnique({
+    where: { id },
+    include: {
+      service: { select: { name: true, duration: true, price: true } },
+      provider: { select: { businessName: true, slug: true } },
+    },
+  });
+
+  if (!booking) {
+    return NextResponse.json({ error: "Booking not found" }, { status: 404 });
+  }
+
+  return NextResponse.json({
+    id: booking.id,
+    status: booking.status,
+    paymentStatus: booking.paymentStatus,
+    clientName: booking.clientName,
+    date: booking.date,
+    time: booking.time,
+    service: booking.service,
+    provider: booking.provider,
+  });
+}
+
 export async function PATCH(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }

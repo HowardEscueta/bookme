@@ -15,6 +15,7 @@ model Provider {
   businessName String   @map("business_name")
   slug         String   @unique
   bio          String   @default("")
+  category     String   @default("other")
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
@@ -62,8 +63,10 @@ model Booking {
   time        String
   clientName  String   @map("client_name")
   clientPhone String   @map("client_phone")
-  status      String   @default("pending")
-  createdAt   DateTime @default(now()) @map("created_at")
+  status        String   @default("pending")
+  paymentStatus String   @default("unpaid") @map("payment_status")
+  paymentRef    String?  @map("payment_ref")
+  createdAt     DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
   provider Provider @relation(fields: [providerId], references: [id], onDelete: Cascade)

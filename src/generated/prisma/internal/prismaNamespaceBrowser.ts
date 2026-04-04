@@ -81,6 +81,7 @@ export const ProviderScalarFieldEnum = {
   businessName: 'businessName',
   slug: 'slug',
   bio: 'bio',
+  category: 'category',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -122,6 +123,8 @@ export const BookingScalarFieldEnum = {
   clientName: 'clientName',
   clientPhone: 'clientPhone',
   status: 'status',
+  paymentStatus: 'paymentStatus',
+  paymentRef: 'paymentRef',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -143,4 +146,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

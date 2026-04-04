@@ -33,6 +33,8 @@ export type BookingMinAggregateOutputType = {
   clientName: string | null
   clientPhone: string | null
   status: string | null
+  paymentStatus: string | null
+  paymentRef: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -46,6 +48,8 @@ export type BookingMaxAggregateOutputType = {
   clientName: string | null
   clientPhone: string | null
   status: string | null
+  paymentStatus: string | null
+  paymentRef: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -59,6 +63,8 @@ export type BookingCountAggregateOutputType = {
   clientName: number
   clientPhone: number
   status: number
+  paymentStatus: number
+  paymentRef: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -74,6 +80,8 @@ export type BookingMinAggregateInputType = {
   clientName?: true
   clientPhone?: true
   status?: true
+  paymentStatus?: true
+  paymentRef?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -87,6 +95,8 @@ export type BookingMaxAggregateInputType = {
   clientName?: true
   clientPhone?: true
   status?: true
+  paymentStatus?: true
+  paymentRef?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +110,8 @@ export type BookingCountAggregateInputType = {
   clientName?: true
   clientPhone?: true
   status?: true
+  paymentStatus?: true
+  paymentRef?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -186,6 +198,8 @@ export type BookingGroupByOutputType = {
   clientName: string
   clientPhone: string
   status: string
+  paymentStatus: string
+  paymentRef: string | null
   createdAt: Date
   updatedAt: Date
   _count: BookingCountAggregateOutputType | null
@@ -220,6 +234,8 @@ export type BookingWhereInput = {
   clientName?: Prisma.StringFilter<"Booking"> | string
   clientPhone?: Prisma.StringFilter<"Booking"> | string
   status?: Prisma.StringFilter<"Booking"> | string
+  paymentStatus?: Prisma.StringFilter<"Booking"> | string
+  paymentRef?: Prisma.StringNullableFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   provider?: Prisma.XOR<Prisma.ProviderScalarRelationFilter, Prisma.ProviderWhereInput>
@@ -235,6 +251,8 @@ export type BookingOrderByWithRelationInput = {
   clientName?: Prisma.SortOrder
   clientPhone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  paymentRef?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   provider?: Prisma.ProviderOrderByWithRelationInput
@@ -253,6 +271,8 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   clientName?: Prisma.StringFilter<"Booking"> | string
   clientPhone?: Prisma.StringFilter<"Booking"> | string
   status?: Prisma.StringFilter<"Booking"> | string
+  paymentStatus?: Prisma.StringFilter<"Booking"> | string
+  paymentRef?: Prisma.StringNullableFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   provider?: Prisma.XOR<Prisma.ProviderScalarRelationFilter, Prisma.ProviderWhereInput>
@@ -268,6 +288,8 @@ export type BookingOrderByWithAggregationInput = {
   clientName?: Prisma.SortOrder
   clientPhone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  paymentRef?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
@@ -287,6 +309,8 @@ export type BookingScalarWhereWithAggregatesInput = {
   clientName?: Prisma.StringWithAggregatesFilter<"Booking"> | string
   clientPhone?: Prisma.StringWithAggregatesFilter<"Booking"> | string
   status?: Prisma.StringWithAggregatesFilter<"Booking"> | string
+  paymentStatus?: Prisma.StringWithAggregatesFilter<"Booking"> | string
+  paymentRef?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
 }
@@ -298,6 +322,8 @@ export type BookingCreateInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   provider: Prisma.ProviderCreateNestedOneWithoutBookingsInput
@@ -313,6 +339,8 @@ export type BookingUncheckedCreateInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -324,6 +352,8 @@ export type BookingUpdateInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.ProviderUpdateOneRequiredWithoutBookingsNestedInput
@@ -339,6 +369,8 @@ export type BookingUncheckedUpdateInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -352,6 +384,8 @@ export type BookingCreateManyInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -363,6 +397,8 @@ export type BookingUpdateManyMutationInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -376,6 +412,8 @@ export type BookingUncheckedUpdateManyInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -399,6 +437,8 @@ export type BookingCountOrderByAggregateInput = {
   clientName?: Prisma.SortOrder
   clientPhone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  paymentRef?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -412,6 +452,8 @@ export type BookingMaxOrderByAggregateInput = {
   clientName?: Prisma.SortOrder
   clientPhone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  paymentRef?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -425,6 +467,8 @@ export type BookingMinOrderByAggregateInput = {
   clientName?: Prisma.SortOrder
   clientPhone?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  paymentStatus?: Prisma.SortOrder
+  paymentRef?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -513,6 +557,10 @@ export type BookingUncheckedUpdateManyWithoutServiceNestedInput = {
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
 export type BookingCreateWithoutProviderInput = {
   id?: string
   date: string
@@ -520,6 +568,8 @@ export type BookingCreateWithoutProviderInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   service: Prisma.ServiceCreateNestedOneWithoutBookingsInput
@@ -533,6 +583,8 @@ export type BookingUncheckedCreateWithoutProviderInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -575,6 +627,8 @@ export type BookingScalarWhereInput = {
   clientName?: Prisma.StringFilter<"Booking"> | string
   clientPhone?: Prisma.StringFilter<"Booking"> | string
   status?: Prisma.StringFilter<"Booking"> | string
+  paymentStatus?: Prisma.StringFilter<"Booking"> | string
+  paymentRef?: Prisma.StringNullableFilter<"Booking"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
 }
@@ -586,6 +640,8 @@ export type BookingCreateWithoutServiceInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   provider: Prisma.ProviderCreateNestedOneWithoutBookingsInput
@@ -599,6 +655,8 @@ export type BookingUncheckedCreateWithoutServiceInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -637,6 +695,8 @@ export type BookingCreateManyProviderInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -648,6 +708,8 @@ export type BookingUpdateWithoutProviderInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   service?: Prisma.ServiceUpdateOneRequiredWithoutBookingsNestedInput
@@ -661,6 +723,8 @@ export type BookingUncheckedUpdateWithoutProviderInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -673,6 +737,8 @@ export type BookingUncheckedUpdateManyWithoutProviderInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -685,6 +751,8 @@ export type BookingCreateManyServiceInput = {
   clientName: string
   clientPhone: string
   status?: string
+  paymentStatus?: string
+  paymentRef?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -696,6 +764,8 @@ export type BookingUpdateWithoutServiceInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   provider?: Prisma.ProviderUpdateOneRequiredWithoutBookingsNestedInput
@@ -709,6 +779,8 @@ export type BookingUncheckedUpdateWithoutServiceInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -721,6 +793,8 @@ export type BookingUncheckedUpdateManyWithoutServiceInput = {
   clientName?: Prisma.StringFieldUpdateOperationsInput | string
   clientPhone?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  paymentRef?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -736,6 +810,8 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   clientName?: boolean
   clientPhone?: boolean
   status?: boolean
+  paymentStatus?: boolean
+  paymentRef?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   provider?: boolean | Prisma.ProviderDefaultArgs<ExtArgs>
@@ -751,6 +827,8 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   clientName?: boolean
   clientPhone?: boolean
   status?: boolean
+  paymentStatus?: boolean
+  paymentRef?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   provider?: boolean | Prisma.ProviderDefaultArgs<ExtArgs>
@@ -766,6 +844,8 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   clientName?: boolean
   clientPhone?: boolean
   status?: boolean
+  paymentStatus?: boolean
+  paymentRef?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   provider?: boolean | Prisma.ProviderDefaultArgs<ExtArgs>
@@ -781,11 +861,13 @@ export type BookingSelectScalar = {
   clientName?: boolean
   clientPhone?: boolean
   status?: boolean
+  paymentStatus?: boolean
+  paymentRef?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "providerId" | "serviceId" | "date" | "time" | "clientName" | "clientPhone" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "providerId" | "serviceId" | "date" | "time" | "clientName" | "clientPhone" | "status" | "paymentStatus" | "paymentRef" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   provider?: boolean | Prisma.ProviderDefaultArgs<ExtArgs>
   service?: boolean | Prisma.ServiceDefaultArgs<ExtArgs>
@@ -814,6 +896,8 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     clientName: string
     clientPhone: string
     status: string
+    paymentStatus: string
+    paymentRef: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["booking"]>
@@ -1249,6 +1333,8 @@ export interface BookingFieldRefs {
   readonly clientName: Prisma.FieldRef<"Booking", 'String'>
   readonly clientPhone: Prisma.FieldRef<"Booking", 'String'>
   readonly status: Prisma.FieldRef<"Booking", 'String'>
+  readonly paymentStatus: Prisma.FieldRef<"Booking", 'String'>
+  readonly paymentRef: Prisma.FieldRef<"Booking", 'String'>
   readonly createdAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
 }

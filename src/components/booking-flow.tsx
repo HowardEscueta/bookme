@@ -79,16 +79,18 @@ export default function BookingFlow({ slug }: { slug: string }) {
     setSubmitting(true);
     setError("");
 
-    const res = await fetch(`/api/providers/${slug}/book`, {
+    const payload = {
+      serviceId: selectedService.id,
+      date: selectedDate,
+      time: selectedTime,
+      clientName,
+      clientPhone,
+    };
+
+    const res = await fetch(`/api/providers/${slug}/checkout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        serviceId: selectedService.id,
-        date: selectedDate,
-        time: selectedTime,
-        clientName,
-        clientPhone,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const data = await res.json();
@@ -99,6 +101,13 @@ export default function BookingFlow({ slug }: { slug: string }) {
       return;
     }
 
+    if (data.checkout_url) {
+      // Paid service — redirect to PayMongo
+      window.location.href = data.checkout_url;
+      return;
+    }
+
+    // Free service or no PayMongo configured — show confirmation
     setBookingId(data.id);
     setStep("confirmed");
     setSubmitting(false);
@@ -260,7 +269,7 @@ export default function BookingFlow({ slug }: { slug: string }) {
                     setSelectedDate(date);
                     setSelectedTime(null);
                   }}
-                  className={`flex-shrink-0 w-[4.25rem] py-3 rounded-2xl text-center ${
+                  className={`shrink-0 w-17 py-3 rounded-2xl text-center ${
                     selectedDate === date
                       ? "bg-primary text-white shadow-sm"
                       : "bg-bg text-secondary hover:bg-bg-soft shadow-sm shadow-black/3"
